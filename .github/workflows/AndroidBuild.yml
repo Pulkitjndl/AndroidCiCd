@@ -4,9 +4,9 @@ on:
     branches : [ master ]
 
   push :
-    branches : [master]
+    branches : [ master ]
 
-  jobs :
+  jobs:
     build :
       runs-on : ubuntu-latest
       steps :
