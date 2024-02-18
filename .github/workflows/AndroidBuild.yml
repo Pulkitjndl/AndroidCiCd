@@ -45,7 +45,7 @@ jobs:
           name: unit_test_report
           path: app/build/reports/tests/testDebugUnitTest/
 
-  build:
+  sonarqube-analysis:
     needs: [unit-test]
     runs-on: ubuntu-latest
     steps:
@@ -62,6 +62,19 @@ jobs:
         run: ./gradlew app:sonarqube -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    needs: [sonarqube-analysis]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.0
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3.13.0
+        with:
+          java-version: '18'
+          distribution: 'adopt'
 
       - name: Build with Gradle
         run: ./gradlew build
