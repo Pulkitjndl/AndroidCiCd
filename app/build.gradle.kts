@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.sonarqube")
 }
 
 android {
@@ -46,6 +47,26 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+}
+sonarqube {
+    properties {
+        property ("sonar.host.url", "https://sonar-url")
+        property ("sonar.login", "login - token ")
+
+        property ("sonar.projectName", "AndroidCiCd")
+        property ("sonar.projectKey", "Pulkitjndl_AndroidCiCd")
+
+        property ("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacocoTestReport.xml")
+        property ("sonar.junit.reportPaths", "$buildDir/test-results/test/")
+        property ("sonar.exclusions", "**/xmldefs/**,**/spec/api.json")
+        property ("sonar.cpd.exclusions", ", **/persistence/entity/**")
+        property ("sonar.dynamicAnalysis", "reuseReports")
+        property ("sonar.clover.reportPaths", "**/build/clover/clover.xml")
+        property ("sonar.java.coveragePlugin", "clover")
+        property ("sonar.sources", "src/main/kotlin")
+        property ("sonar.tests", ".")
+        property ("sonar.test.inclusions", "**/*Test*/**")
     }
 }
 
