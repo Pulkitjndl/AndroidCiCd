@@ -85,3 +85,23 @@ jobs:
         with:
           name: AndroidCiCd.apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+  deploy:
+    needs: [ build ]
+    name: Distribute For Alpha Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download latest artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: AndroidCiCd.apk
+
+      - name: Upload to App Center
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+          appName: pulkit/AndroidCiCd
+          token: ${{ secrets.APP_CENTER_TOKEN }}
+          group: AlphaTesters
+          file: AndroidCiCd.apk
+          notifyTesters: true
+          debug: true
