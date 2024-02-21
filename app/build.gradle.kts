@@ -68,7 +68,6 @@ sonarqube {
         property ("sonar.tests", ".")
         property ("sonar.test.inclusions", "**/*Test*/**")
         property ("sonar.organization", "pulkit")
-        property ("sonar.sources", "./src/main/kotlin")
     }
 }
 
