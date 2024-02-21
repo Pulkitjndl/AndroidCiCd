@@ -64,7 +64,6 @@ sonarqube {
         property ("sonar.dynamicAnalysis", "reuseReports")
         property ("sonar.clover.reportPaths", "**/build/clover/clover.xml")
         property ("sonar.java.coveragePlugin", "clover")
-        property ("sonar.sources", "src/main/kotlin")
         property ("sonar.tests", ".")
         property ("sonar.test.inclusions", "**/*Test*/**")
         property ("sonar.organization", "pulkit")
